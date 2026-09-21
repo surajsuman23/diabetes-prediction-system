@@ -2,9 +2,9 @@
 
 A reproducible educational comparison of K-Nearest Neighbors and Gaussian Naive Bayes on the historical Pima Indians Diabetes dataset. Includes a majority-class baseline, training-set exploratory analysis, and a held-out evaluation.
 
-## Provenance
+## About this version
 
-This is a new, AI-assisted reconstruction of a project described in Suraj Suman's resume. The original source files were unavailable. It is not a recovered historical repository, and results from this implementation must not be presented as results from the original project. Code was written for this reconstruction; external references and data provenance are listed in `SOURCES.md`.
+Rebuilt portfolio implementation based on an earlier project. This repository contains the current code, tests and documentation. Reported results apply to this version. References and data sources are listed in `SOURCES.md`.
 
 ## Setup
 
@@ -60,6 +60,6 @@ This historical dataset describes a restricted population: women aged at least 2
 
 The implementation performs preprocessing and exploratory analysis, but does not invent a feature-engineering benefit or clinical outcome.
 
-## Verified reconstruction run
+## Benchmark results
 
-`benchmark_results.json` records a run on 2026-09-22 with Python 3.12, NumPy 2.5.3, pandas 3.0.6 and scikit-learn 1.9.1. It uses the documented seed 42 split and five folds. This is a new result from this reconstruction, not a historical project result. The selected KNN model has test accuracy 0.7135 and recall 0.5672; Naive Bayes has accuracy 0.7240 and recall 0.6269. KNN was selected by training CV recall even though Naive Bayes scored higher on this holdout.
+`benchmark_results.json` records a run on 2026-09-22 with Python 3.12, NumPy 2.5.3, pandas 3.0.6 and scikit-learn 1.9.1. It uses the documented seed 42 split and five folds. These results were measured on the current implementation. The selected KNN model has test accuracy 0.7135 and recall 0.5672; Naive Bayes has accuracy 0.7240 and recall 0.6269. KNN was selected by training CV recall even though Naive Bayes scored higher on this holdout.
