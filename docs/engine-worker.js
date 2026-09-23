@@ -8,7 +8,7 @@ async function initialize(app){
  postMessage({progress:'Loading scientific packages…'});
  await py.loadPackage(['numpy','pandas','scikit-learn']);
  py.FS.mkdir('/project');
- const files=['browser_runner.py',...(app==='diabetes'?['diabetes.py','diabetes.csv']:['recommender.py','fictional_hospitals.csv'])];
+ const files=['browser_runner.py','diabetes.py','diabetes.csv'];
  await Promise.all(files.map(async name=>{const r=await fetch(new URL(name,self.location.href));if(!r.ok)throw Error('Unable to load '+name);py.FS.writeFile('/project/'+name,await r.text());}));
  await py.runPythonAsync("import sys, json\nsys.path.insert(0, '/project')\nfrom browser_runner import browser_run");
  return py;

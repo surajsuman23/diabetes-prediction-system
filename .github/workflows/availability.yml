@@ -1,0 +1,14 @@
+name: Published app availability
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  availability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - run: curl --fail --location --retry 2 --max-time 30 'https://suraj-diabetes-benchmark.m16labs-0951.chatgpt.site' -o /dev/null
+      - run: curl --fail --location --retry 2 --max-time 30 'https://suraj-diabetes-benchmark.m16labs-0951.chatgpt.site/app.js' -o /dev/null
