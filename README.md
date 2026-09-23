@@ -88,3 +88,7 @@ The public demo is hosted independently of this computer. The project can also b
 ## Independent application
 
 This app has its own deployment and source repository. It has no shared navigation or runtime dependency on the other portfolio projects.
+
+## Experiment studio
+
+The opening metrics are a labeled saved reference run from the browser runtime, not a claim that a new calculation has occurred. Select **Run experiment** to calculate fresh results. The interface supports seed/fold changes, model-specific confusion matrices, cancellation, timeout/error handling and a JSON export that distinguishes reference results from live computation. Cancelling preserves prior results. See `OPERATIONS.md` for verification and monitoring.
