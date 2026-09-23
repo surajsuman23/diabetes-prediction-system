@@ -1,5 +1,8 @@
 # Diabetes Prediction System
 
+**[Open interactive demo](https://suraj-suman-projects.m16labs-0951.chatgpt.site/diabetes.html)**
+
+
 A reproducible educational comparison of K-Nearest Neighbors and Gaussian Naive Bayes on the historical Pima Indians Diabetes dataset. Includes a majority-class baseline, training-set exploratory analysis, and a held-out evaluation.
 
 ## About this version
@@ -63,3 +66,21 @@ The implementation performs preprocessing and exploratory analysis, but does not
 ## Benchmark results
 
 `benchmark_results.json` records a run on 2026-09-22 with Python 3.12, NumPy 2.5.3, pandas 3.0.6 and scikit-learn 1.9.1. It uses the documented seed 42 split and five folds. These results were measured on the current implementation. The selected KNN model has test accuracy 0.7135 and recall 0.5672; Naive Bayes has accuracy 0.7240 and recall 0.6269. KNN was selected by training CV recall even though Naive Bayes scored higher on this holdout.
+
+## Browser interface
+
+The `docs/` folder contains a standalone browser interface. To run it locally from the repository root:
+
+```sh
+python3 -m http.server 8080 --directory docs
+```
+
+Open http://localhost:8080. Serve these files over HTTP or HTTPS; opening `index.html` directly as a file does not support the worker and module imports.
+
+The interface loads Python through Pyodide 0.27.5 in a dedicated Web Worker and executes the project's original Python module. The first run downloads Python and scientific packages from the jsDelivr CDN, so it needs an internet connection and may take a minute. Later runs reuse the loaded runtime while the page remains open. Inputs and calculations stay in the browser; there is no application account or server-side input storage.
+
+The browser runtime uses scikit-learn 1.6.1, pandas 2.2.3 and NumPy 2.0.2. These differ from the original desktop benchmark environment; exported result JSON records the actual runtime versions. Results should always be quoted with their runtime and split configuration.
+
+`docs/diabetes.csv` is the 768-row OpenML dataset 37, version 1, downloaded for the demo. Its column names and class labels are preserved. This is a historical educational dataset, not private user input. Source: https://www.openml.org/d/37.
+
+The public demo is hosted independently of this computer. The project can also be served from the `docs/` directory on a static host.

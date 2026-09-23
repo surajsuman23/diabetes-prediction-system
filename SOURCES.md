@@ -7,3 +7,9 @@
 - [scikit-learn GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html): cross-validated parameter selection.
 
 Accessed 2026-09-22. Library and dataset ownership remains with the respective owners. No third-party implementation was copied.
+
+## Browser interface references
+
+- Pyodide 0.27.5 runtime and package documentation: https://pyodide.org/en/0.27.5/usage/quickstart.html
+- Pyodide scientific package versions: https://pyodide.org/en/0.27.5/usage/packages-in-pyodide.html
+- Web Workers: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API
