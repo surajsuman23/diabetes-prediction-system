@@ -5,9 +5,9 @@
 
 A reproducible educational comparison of K-Nearest Neighbors and Gaussian Naive Bayes on the historical Pima Indians Diabetes dataset. Includes a majority-class baseline, training-set exploratory analysis, and a held-out evaluation.
 
-## About this version
+## Implementation
 
-Rebuilt portfolio implementation based on an earlier project. This repository contains the current code, tests and documentation. Reported results apply to this version. References and data sources are listed in `SOURCES.md`.
+This repository includes the command-line implementation, an interactive browser demo, tests and documentation. Reported results apply to the documented implementation and runtime. References and data sources are listed in `SOURCES.md`.
 
 ## Setup
 
@@ -28,7 +28,7 @@ python diabetes.py --download-openml
 python -m unittest discover -v
 ```
 
-The first command downloads **OpenML dataset 37, version 1** into `.cache/openml/`. Dataset files are not bundled or uploaded in this repository. Network access is required for the first download. A download failure is an error, not a reason to substitute synthetic results.
+The first command downloads **OpenML dataset 37, version 1** into `.cache/openml/`. The browser demo includes a copy in `docs/diabetes.csv`. The CLI download command requires network access on its first run; alternatively, pass `--csv docs/diabetes.csv`. A download failure is an error, not a reason to substitute synthetic results.
 
 To use an existing compatible file:
 
