@@ -1,6 +1,6 @@
 # Diabetes Prediction System
 
-**[Open interactive demo](https://suraj-suman-projects.m16labs-0951.chatgpt.site/diabetes.html)**
+**[Open interactive demo](https://suraj-diabetes-benchmark.m16labs-0951.chatgpt.site)**
 
 
 A reproducible educational comparison of K-Nearest Neighbors and Gaussian Naive Bayes on the historical Pima Indians Diabetes dataset. Includes a majority-class baseline, training-set exploratory analysis, and a held-out evaluation.
@@ -84,3 +84,7 @@ The browser runtime uses scikit-learn 1.6.1, pandas 2.2.3 and NumPy 2.0.2. These
 `docs/diabetes.csv` is the 768-row OpenML dataset 37, version 1, downloaded for the demo. Its column names and class labels are preserved. This is a historical educational dataset, not private user input. Source: https://www.openml.org/d/37.
 
 The public demo is hosted independently of this computer. The project can also be served from the `docs/` directory on a static host.
+
+## Independent application
+
+This app has its own deployment and source repository. It has no shared navigation or runtime dependency on the other portfolio projects.
