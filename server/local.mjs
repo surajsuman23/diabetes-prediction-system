@@ -1,0 +1,10 @@
+import {createServer} from 'node:http';
+import {readFile,stat} from 'node:fs/promises';
+import {resolve,sep,extname} from 'node:path';
+import worker from './worker.mjs';
+const root=resolve('docs');const port=Number(process.env.PORT||8212);const host=process.env.HOST||'127.0.0.1';
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.csv':'text/csv','.py':'text/plain'};
+const assets={fetch:async request=>{let path;try{path=decodeURIComponent(new URL(request.url).pathname)}catch{return new Response('Bad path',{status:400})}const file=resolve(root,'.'+(path==='/'?'/index.html':path));if(!file.startsWith(root+sep))return new Response('Not found',{status:404});try{if(!(await stat(file)).isFile())throw Error();return new Response(await readFile(file),{headers:{'Content-Type':mime[extname(file)]||'application/octet-stream'}})}catch{return new Response('Not found',{status:404})}}};
+const server=createServer(async(req,res)=>{try{const request=new Request('http://'+(req.headers.host||'localhost')+req.url,{method:req.method,headers:req.headers,...!['GET','HEAD'].includes(req.method)?{body:req,duplex:'half'}:{}});const response=await worker.fetch(request,{ASSETS:assets});res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));}catch{res.writeHead(500,{'Content-Type':'application/json'});res.end(JSON.stringify({error:{message:'Unexpected server failure'}}));}});
+server.requestTimeout=15000;server.headersTimeout=10000;server.keepAliveTimeout=5000;server.listen(port,host,()=>console.log('Independent app: http://'+host+':'+port));
+for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>{server.close(()=>process.exit(0));setTimeout(()=>process.exit(1),10000).unref()});

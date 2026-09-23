@@ -12,3 +12,4 @@ jobs:
     steps:
       - run: curl --fail --location --retry 2 --max-time 30 'https://suraj-diabetes-benchmark.m16labs-0951.chatgpt.site' -o /dev/null
       - run: curl --fail --location --retry 2 --max-time 30 'https://suraj-diabetes-benchmark.m16labs-0951.chatgpt.site/app.js' -o /dev/null
+      - run: curl --fail --location --retry 2 --max-time 30 'https://suraj-diabetes-benchmark.m16labs-0951.chatgpt.site/api/health/ready'

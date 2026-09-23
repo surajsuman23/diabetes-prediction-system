@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import worker from '../server/worker.mjs';
+test('health and unknown route',async()=>{assert.equal((await worker.fetch(new Request('https://test/api/health/ready'),{})).status,200);assert.equal((await worker.fetch(new Request('https://test/api/missing'),{})).status,404)});
+test('reference provenance is explicit',async()=>{const r=await worker.fetch(new Request('https://test/api/v1/benchmark/reference'),{});assert.equal(r.status,200);const body=await r.json();assert.equal(body.presentation.kind,'saved_reference');assert.equal(body.test_rows,192)});

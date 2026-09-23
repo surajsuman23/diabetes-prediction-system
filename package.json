@@ -4,10 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "start": "node server/local.mjs",
+    "build": "node scripts/build.mjs",
+    "test:api": "node --test tests/api.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@axe-core/playwright": "^4.13.0"
+    "@axe-core/playwright": "^4.13.0",
+    "esbuild": "^0.25.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

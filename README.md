@@ -72,10 +72,11 @@ The implementation performs preprocessing and exploratory analysis, but does not
 The `docs/` folder contains a standalone browser interface. To run it locally from the repository root:
 
 ```sh
-python3 -m http.server 8080 --directory docs
+npm ci
+npm start
 ```
 
-Open http://localhost:8080. Serve these files over HTTP or HTTPS; opening `index.html` directly as a file does not support the worker and module imports.
+Open http://localhost:8212. Serve these files over HTTP or HTTPS; opening `index.html` directly as a file does not support the worker and module imports.
 
 The interface loads Python through Pyodide 0.27.5 in a dedicated Web Worker and executes the project's original Python module. The first run downloads Python and scientific packages from the jsDelivr CDN, so it needs an internet connection and may take a minute. Later runs reuse the loaded runtime while the page remains open. Inputs and calculations stay in the browser; there is no application account or server-side input storage.
 
@@ -92,3 +93,9 @@ This app has its own deployment and source repository. It has no shared navigati
 ## Experiment studio
 
 The opening metrics are a labeled saved reference run from the browser runtime, not a claim that a new calculation has occurred. Select **Run experiment** to calculate fresh results. The interface supports seed/fold changes, model-specific confusion matrices, cancellation, timeout/error handling and a JSON export that distinguishes reference results from live computation. Cancelling preserves prior results. See `OPERATIONS.md` for verification and monitoring.
+
+## Independent server
+
+Run `npm ci` and `npm start` to serve frontend and API together on http://127.0.0.1:8212. Use `npm run build` for the Worker deployment bundle. The Node entry point is `server/local.mjs`; the hosted Worker entry point is `server/worker.mjs`. `npm run test:api` verifies its contracts. A non-root Dockerfile is included.
+
+The backend serves `GET /api/v1/benchmark/reference` and `GET /api/v1/benchmark/config`, plus the frontend and dataset. Fresh model training remains in the browser's Python worker; reference data is never presented as a fresh server computation.

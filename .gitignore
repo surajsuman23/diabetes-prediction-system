@@ -9,3 +9,6 @@ reports/
 node_modules/
 playwright-report/
 test-results/
+
+dist/
+.openai/execution-profile.json

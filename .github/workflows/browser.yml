@@ -13,6 +13,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run test:api
+      - run: npm run build
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:browser
       - uses: actions/upload-artifact@v4
@@ -21,3 +23,20 @@ jobs:
           name: browser-report
           path: playwright-report/
           retention-days: 7
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t standalone-demo .
+      - run: docker run -d --name standalone-demo -p 127.0.0.1:8212:8212 standalone-demo
+      - run: |
+          for i in $(seq 1 15); do
+            if curl --fail http://127.0.0.1:8212/api/health/ready; then exit 0; fi
+            sleep 2
+          done
+          docker logs standalone-demo
+          exit 1
+      - run: test "$(docker exec standalone-demo id -u)" != "0"
+      - run: docker rm -f standalone-demo
+        if: always()

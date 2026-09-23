@@ -1,0 +1,2 @@
+import {build} from 'esbuild';import {cp,mkdir,rm,copyFile} from 'node:fs/promises';
+await rm('dist',{recursive:true,force:true});await mkdir('dist/server',{recursive:true});await cp('docs','dist/client',{recursive:true});await mkdir('dist/.openai',{recursive:true});await copyFile('.openai/hosting.json','dist/.openai/hosting.json');await build({entryPoints:['server/worker.mjs'],bundle:true,platform:'browser',format:'esm',target:'es2022',outfile:'dist/server/index.js',minify:true});console.log('Built independent frontend and Worker backend');
